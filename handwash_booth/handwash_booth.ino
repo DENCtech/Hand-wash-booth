@@ -1,18 +1,18 @@
-int sensor = 6; // ir sensor for soap
+int sensor = 7; // ir sensor for soap
 int sensor2 = 9; // ir sensor for dryer
+int sensor3 = 8; // Optocoupler
 int detect = 0;
 int detect2 = 0;
 int detect3;
 int relay = 4; // 12v dc pump
 int relay2 = 3; // dryer
 int relay3 = 2; // water pump
-int button = 7; // water tank mode of operation button HIGH for external  and LOW for internal
+int button = 6; // water tank mode of operation button HIGH for external  and LOW for internal
 int know; // status of the button
 int slLed = 10; // empty soap level LED
 int wlLed = 11; // empty water level LED
 int wwlLed = 12; // full waste water level LED
 int extLed = 13; // external/internal water source LED
-int sensor3 = A5; // Optocoupler
 int status1 = 0; // status of the optocoupler
 int buzzer = 5; // the buzzer
 int state,state1,state2; // level sensor state
@@ -48,7 +48,7 @@ void loop() {
   wasteLevel();
   detect = digitalRead(sensor);
   detect2 = digitalRead(sensor2);
-  detect3 = analogRead(sensor3);
+  detect3 = digitalRead(sensor3);
   know = digitalRead(button);
 //  Serial.println(know);
   if(know == LOW && state > 0 && state1 > 0 && state2 < 1023){
@@ -72,7 +72,7 @@ void loop() {
         delay(200);
         digitalWrite(buzzer, LOW);
         delay(200);
-        detect3 = analogRead(sensor);
+        detect3 = analogRead(sensor3);
         delay(10);
       }
       digitalWrite(relay3, HIGH);
