@@ -46,7 +46,7 @@ void loop() {
   soapLevel();
   waterLevel();
   wasteLevel();
-  detect = analogRead(sensor);
+  detect = digitalRead(sensor);
   detect2 = digitalRead(sensor2);
   detect3 = analogRead(sensor3);
   know = digitalRead(button);
@@ -54,18 +54,28 @@ void loop() {
   if(know == LOW && state > 0 && state1 > 0 && state2 < 1023){
     digitalWrite(extLed, HIGH);
     delay(100);
-    if(detect3 < 1000){
-      status1 = !status1;
-       if(status1 == 1){
-        Serial.println("On");
-          digitalWrite(relay3, LOW);
-          delay(500);
-        }else{
-          Serial.println("Off");
-          digitalWrite(relay3, HIGH);
-          delay(500);
-        }
+//    if(detect3 < 1000){
+//      status1 = !status1;
+//       if(status1 == 1){
+//        Serial.println("On");
+//          digitalWrite(relay3, LOW);
+//          delay(500);
+//        }else{
+//          Serial.println("Off");
+//          digitalWrite(relay3, HIGH);
+//          delay(500);
+//        }
+//      }
+      while(detect3 == 0){
+        digitalWrite(relay3, LOW);
+        digitalWrite(buzzer, HIGH);
+        delay(200);
+        digitalWrite(buzzer, LOW);
+        delay(200);
+        detect3 = analogRead(sensor);
+        delay(10);
       }
+      digitalWrite(relay3, HIGH);
       while(detect == 0){
         digitalWrite(relay, LOW);
         digitalWrite(buzzer, HIGH);
