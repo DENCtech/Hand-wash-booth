@@ -43,15 +43,14 @@ void setup() {
 }
 
 void loop() {
-  soapLevel();
-  waterLevel();
-  wasteLevel();
+//  soapLevel();
+//  waterLevel();
+//  wasteLevel();
   detect = digitalRead(sensor);
   detect2 = digitalRead(sensor2);
   detect3 = digitalRead(sensor3);
   know = digitalRead(button);
-//  Serial.println(know);
-  if(know == LOW && state > 0 && state1 > 0 && state2 < 1023){
+  if(know == LOW){
     digitalWrite(extLed, HIGH);
     delay(100);
 //    if(detect3 < 1000){
@@ -66,92 +65,94 @@ void loop() {
 //          delay(500);
 //        }
 //      }
-      while(detect3 == 0){
-        digitalWrite(relay3, LOW);
-        digitalWrite(buzzer, HIGH);
-        delay(200);
-        digitalWrite(buzzer, LOW);
-        delay(200);
-        detect3 = analogRead(sensor3);
-        delay(10);
-      }
-      digitalWrite(relay3, HIGH);
-      while(detect == 0){
-        digitalWrite(relay, LOW);
-        digitalWrite(buzzer, HIGH);
-        delay(200);
-        digitalWrite(buzzer, LOW);
-        delay(200);
-        detect = digitalRead(sensor);
-        delay(10);
-      }
-      digitalWrite(relay, HIGH);
-      while(detect2 == 0){
-        digitalWrite(relay2, LOW);
-        digitalWrite(buzzer, HIGH);
-        delay(200);
-        digitalWrite(buzzer, LOW);
-        delay(200);
-        detect2 = digitalRead(sensor2);
-        delay(10);
-      }
-    digitalWrite(relay2, HIGH);
-    
+    while(detect3 == 0){
+      digitalWrite(relay3, LOW);
+      digitalWrite(buzzer, HIGH);
+      delay(200);
+      digitalWrite(buzzer, LOW);
+      delay(200);
+      detect3 = analogRead(sensor3);
+      delay(10);
+    }
+    digitalWrite(relay3, HIGH);
+    while(detect == 0){
+      digitalWrite(relay, LOW);
+      digitalWrite(buzzer, HIGH);
+      delay(200);
+      digitalWrite(buzzer, LOW);
+      delay(200);
+      detect = digitalRead(sensor);
+      delay(10);
+    }
+    digitalWrite(relay, HIGH);
+    while(detect2 == 0){
+      digitalWrite(relay2, LOW);
+      digitalWrite(buzzer, HIGH);
+      delay(200);
+      digitalWrite(buzzer, LOW);
+      delay(200);
+      detect2 = digitalRead(sensor2);
+      delay(10);
+    }
+    digitalWrite(relay2, HIGH);   
   }
   else{
     digitalWrite(extLed, LOW);
     delay(100);
-    if(state > 0 && state1 > 0 && state2 < 1023){
-      while(detect == 0){
-        digitalWrite(relay, LOW);
-        digitalWrite(buzzer, HIGH);
-        delay(200);
-        digitalWrite(buzzer, LOW);
-        delay(200);
-        detect = digitalRead(sensor);
-        delay(10);
-      }
-      digitalWrite(relay, HIGH);
-      while(detect2 == 0){
-        digitalWrite(relay2, LOW);
-        digitalWrite(buzzer, HIGH);
-        delay(200);
-        digitalWrite(buzzer, LOW);
-        delay(200);
-        detect2 = digitalRead(sensor2);
-        delay(10);
-      }
-      digitalWrite(relay2, HIGH);
-    }else{
-      Serial.println("Error!!! Find fault!!!");
+    while(detect == 0){
+      digitalWrite(relay, LOW);
+      digitalWrite(buzzer, HIGH);
+      delay(200);
+      digitalWrite(buzzer, LOW);
+      delay(200);
+      detect = digitalRead(sensor);
+      delay(10);
     }
-    
-  }
+    digitalWrite(relay, HIGH);
+    while(detect2 == 0){
+      digitalWrite(relay2, LOW);
+      digitalWrite(buzzer, HIGH);
+      delay(200);
+      digitalWrite(buzzer, LOW);
+      delay(200);
+      detect2 = digitalRead(sensor2);
+      delay(10);
+    }
+    digitalWrite(relay2, HIGH);
+    while(detect3 == 0){
+      digitalWrite(relay3, LOW);
+      digitalWrite(buzzer, HIGH);
+      delay(200);
+      digitalWrite(buzzer, LOW);
+      delay(200);
+      detect3 = analogRead(sensor3);
+      delay(10);
+    }
+    digitalWrite(relay3, HIGH);
+    Serial.println("Error!!! Find fault!!!");
+  }   
 }
 void soapLevel(){
-  state = analogRead(soapL);
-  if(state == 0){
+  while(state == 0){
     digitalWrite(slLed, HIGH);
+    state = analogRead(soapL);
+    delay(10);
   }
-  else{
-    digitalWrite(slLed, LOW);
-  }
+  digitalWrite(slLed, LOW);
 }
 void waterLevel(){
-  state1 = analogRead(waterL);
-  if(state1 == 0){
+  while(state1 == 0){
     digitalWrite(wlLed, HIGH);
+    state1 = analogRead(waterL);
+    delay(10);
   }
-  else{
-    digitalWrite(wlLed, LOW);
-  }
+  digitalWrite(wlLed, LOW);
 }
 void wasteLevel(){
-  state2 = analogRead(wasteL);
-  if(state2 >= 1023){
+  while(state2 >= 1023){
     digitalWrite(wwlLed, HIGH);
+    state2 = analogRead(wasteL);
+    delay(10);
   }
-  else{
-    digitalWrite(wwlLed, LOW);
-  }
+  digitalWrite(wwlLed, LOW);
 }
