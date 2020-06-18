@@ -7,6 +7,7 @@ int detect3;
 int relay = 4; // 12v dc pump
 int relay2 = 3; // dryer
 int relay3 = 2; // water pump
+int relay4 = 5; // solenoid valve
 int button = 6; // water tank mode of operation button HIGH for external  and LOW for internal
 int know; // status of the button
 int slLed = 10; // empty soap level LED
@@ -14,7 +15,8 @@ int wlLed = 11; // empty water level LED
 int wwlLed = 12; // full waste water level LED
 int extLed = 13; // external/internal water source LED
 int status1 = 0; // status of the optocoupler
-int buzzer = 5; // the buzzer
+//int buzzer = 5; // the buzzer
+//int solenoid = 5;
 int state,state1,state2; // level sensor state
 int soapL = A2; // soap level monitor
 int waterL = A3; // water level monitor
@@ -29,15 +31,16 @@ void setup() {
   pinMode(relay, OUTPUT);
   pinMode(relay2, OUTPUT);
   pinMode(relay3, OUTPUT);
-  pinMode(slLed, OUTPUT);
+  pinMode(relay4, OUTPUT);
   pinMode(wlLed, OUTPUT);
   pinMode(wwlLed, OUTPUT);
   pinMode(extLed, OUTPUT);
-  pinMode(buzzer, OUTPUT);
+//  pinMode(solenoid, OUTPUT);
 //  Servo1.attach(servoPin);
   digitalWrite(relay, HIGH);
   digitalWrite(relay2, HIGH);
   digitalWrite(relay3, HIGH);
+  digitalWrite(relay4, HIGH);
 //  digitalWrite(buzzer, LOW);
   delay(2000);
 }
@@ -52,6 +55,7 @@ void loop() {
   know = digitalRead(button);
   if(know == LOW){
     digitalWrite(extLed, HIGH);
+    digitalWrite(relay4, HIGH);
     delay(100);
 //    if(detect3 < 1000){
 //      status1 = !status1;
@@ -67,30 +71,33 @@ void loop() {
 //      }
     while(detect3 == 0){
       digitalWrite(relay3, LOW);
-      digitalWrite(buzzer, HIGH);
-      delay(200);
-      digitalWrite(buzzer, LOW);
-      delay(200);
-      detect3 = analogRead(sensor3);
+//      digitalWrite(buzzer, HIGH);
+//      delay(200);
+//      digitalWrite(buzzer, LOW);
+//      delay(200);
+      detect3 = digitalRead(sensor3);
       delay(10);
     }
     digitalWrite(relay3, HIGH);
     while(detect == 0){
       digitalWrite(relay, LOW);
-      digitalWrite(buzzer, HIGH);
-      delay(200);
-      digitalWrite(buzzer, LOW);
-      delay(200);
+      delay(2000);
+      digitalWrite(relay, HIGH);
+      delay(500);
+//      digitalWrite(buzzer, HIGH);
+//      delay(200);
+//      digitalWrite(buzzer, LOW);
+//      delay(200);
       detect = digitalRead(sensor);
       delay(10);
     }
     digitalWrite(relay, HIGH);
     while(detect2 == 0){
       digitalWrite(relay2, LOW);
-      digitalWrite(buzzer, HIGH);
-      delay(200);
-      digitalWrite(buzzer, LOW);
-      delay(200);
+//      digitalWrite(buzzer, HIGH);
+//      delay(200);
+//      digitalWrite(buzzer, LOW);
+//      delay(200);
       detect2 = digitalRead(sensor2);
       delay(10);
     }
@@ -98,34 +105,38 @@ void loop() {
   }
   else{
     digitalWrite(extLed, LOW);
+    digitalWrite(relay4, LOW);
     delay(100);
     while(detect == 0){
       digitalWrite(relay, LOW);
-      digitalWrite(buzzer, HIGH);
-      delay(200);
-      digitalWrite(buzzer, LOW);
-      delay(200);
+      delay(2000);
+      digitalWrite(relay, HIGH);
+      delay(500);
+//      digitalWrite(buzzer, HIGH);
+//      delay(200);
+//      digitalWrite(buzzer, LOW);
+//      delay(200);
       detect = digitalRead(sensor);
       delay(10);
     }
     digitalWrite(relay, HIGH);
     while(detect2 == 0){
       digitalWrite(relay2, LOW);
-      digitalWrite(buzzer, HIGH);
-      delay(200);
-      digitalWrite(buzzer, LOW);
-      delay(200);
+//      digitalWrite(buzzer, HIGH);
+//      delay(200);
+//      digitalWrite(buzzer, LOW);
+//      delay(200);
       detect2 = digitalRead(sensor2);
       delay(10);
     }
     digitalWrite(relay2, HIGH);
     while(detect3 == 0){
       digitalWrite(relay3, LOW);
-      digitalWrite(buzzer, HIGH);
-      delay(200);
-      digitalWrite(buzzer, LOW);
-      delay(200);
-      detect3 = analogRead(sensor3);
+//      digitalWrite(buzzer, HIGH);
+//      delay(200);
+//      digitalWrite(buzzer, LOW);
+//      delay(200);
+      detect3 = digitalRead(sensor3);
       delay(10);
     }
     digitalWrite(relay3, HIGH);
