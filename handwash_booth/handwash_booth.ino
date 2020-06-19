@@ -111,7 +111,7 @@ void loop() {
   }   
 }
 void soapLevel(){
-  while(state == 0){
+  while(state <= 0){
     digitalWrite(slLed, HIGH);
     state = analogRead(soapL);
     delay(10);
@@ -119,7 +119,7 @@ void soapLevel(){
   digitalWrite(slLed, LOW);
 }
 void waterLevel(){
-  while(state1 == 0){
+  while(state1 <= 0){
     digitalWrite(wlLed, HIGH);
     state1 = analogRead(waterL);
     delay(10);
