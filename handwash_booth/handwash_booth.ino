@@ -14,7 +14,7 @@ int slLed = 10; // empty soap level LED
 int wlLed = 11; // empty water level LED
 int wwlLed = 12; // full waste water level LED
 int extLed = 13; // external/internal water source LED
-int status1 = 0; // status of the optocoupler
+//int status1 = 0; // status of the optocoupler
 //int buzzer = 5; // the buzzer
 //int solenoid = 5;
 int state,state1,state2; // level sensor state
@@ -35,20 +35,17 @@ void setup() {
   pinMode(wlLed, OUTPUT);
   pinMode(wwlLed, OUTPUT);
   pinMode(extLed, OUTPUT);
-//  pinMode(solenoid, OUTPUT);
-//  Servo1.attach(servoPin);
   digitalWrite(relay, HIGH);
   digitalWrite(relay2, HIGH);
   digitalWrite(relay3, HIGH);
   digitalWrite(relay4, HIGH);
-//  digitalWrite(buzzer, LOW);
-  delay(2000);
+  delay(1000);
 }
 
 void loop() {
-//  soapLevel();
-//  waterLevel();
-//  wasteLevel();
+  soapLevel();
+  waterLevel();
+  wasteLevel();
   detect = digitalRead(sensor);
   detect2 = digitalRead(sensor2);
   detect3 = digitalRead(sensor3);
@@ -71,33 +68,18 @@ void loop() {
 //      }
     while(detect3 == 0){
       digitalWrite(relay3, LOW);
-//      digitalWrite(buzzer, HIGH);
-//      delay(200);
-//      digitalWrite(buzzer, LOW);
-//      delay(200);
       detect3 = digitalRead(sensor3);
       delay(10);
     }
     digitalWrite(relay3, HIGH);
     while(detect == 0){
       digitalWrite(relay, LOW);
-//      delay(2000);
-//      digitalWrite(relay, HIGH);
-//      delay(500);
-//      digitalWrite(buzzer, HIGH);
-//      delay(200);
-//      digitalWrite(buzzer, LOW);
-//      delay(200);
       detect = digitalRead(sensor);
       delay(10);
     }
     digitalWrite(relay, HIGH);
     while(detect2 == 0){
       digitalWrite(relay2, LOW);
-//      digitalWrite(buzzer, HIGH);
-//      delay(200);
-//      digitalWrite(buzzer, LOW);
-//      delay(200);
       detect2 = digitalRead(sensor2);
       delay(10);
     }
@@ -109,33 +91,18 @@ void loop() {
     delay(100);
     while(detect == 0){
       digitalWrite(relay, LOW);
-//      delay(2000);
-//      digitalWrite(relay, HIGH);
-//      delay(500);
-//      digitalWrite(buzzer, HIGH);
-//      delay(200);
-//      digitalWrite(buzzer, LOW);
-//      delay(200);
       detect = digitalRead(sensor);
       delay(10);
     }
     digitalWrite(relay, HIGH);
     while(detect2 == 0){
       digitalWrite(relay2, LOW);
-//      digitalWrite(buzzer, HIGH);
-//      delay(200);
-//      digitalWrite(buzzer, LOW);
-//      delay(200);
       detect2 = digitalRead(sensor2);
       delay(10);
     }
     digitalWrite(relay2, HIGH);
     while(detect3 == 0){
       digitalWrite(relay3, LOW);
-//      digitalWrite(buzzer, HIGH);
-//      delay(200);
-//      digitalWrite(buzzer, LOW);
-//      delay(200);
       detect3 = digitalRead(sensor3);
       delay(10);
     }
