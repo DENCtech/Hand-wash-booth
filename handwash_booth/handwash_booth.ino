@@ -81,9 +81,9 @@ void loop() {
     digitalWrite(relay3, HIGH);
     while(detect == 0){
       digitalWrite(relay, LOW);
-      delay(2000);
-      digitalWrite(relay, HIGH);
-      delay(500);
+//      delay(2000);
+//      digitalWrite(relay, HIGH);
+//      delay(500);
 //      digitalWrite(buzzer, HIGH);
 //      delay(200);
 //      digitalWrite(buzzer, LOW);
@@ -109,9 +109,9 @@ void loop() {
     delay(100);
     while(detect == 0){
       digitalWrite(relay, LOW);
-      delay(2000);
-      digitalWrite(relay, HIGH);
-      delay(500);
+//      delay(2000);
+//      digitalWrite(relay, HIGH);
+//      delay(500);
 //      digitalWrite(buzzer, HIGH);
 //      delay(200);
 //      digitalWrite(buzzer, LOW);
