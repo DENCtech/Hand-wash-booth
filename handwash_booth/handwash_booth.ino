@@ -1,6 +1,6 @@
 int sensor = 7; // ir sensor for soap
-int sensor2 = 9; // ir sensor for dryer
-int sensor3 = 8; // Optocoupler
+int sensor2 = 8; // ir sensor for dryer
+int sensor3 = 9; // ir sensor for water
 int detect = 0;
 int detect2 = 0;
 int detect3;
@@ -14,9 +14,6 @@ int slLed = 10; // empty soap level LED
 int wlLed = 11; // empty water level LED
 int wwlLed = 12; // full waste water level LED
 int extLed = 13; // external/internal water source LED
-//int status1 = 0; // status of the optocoupler
-//int buzzer = 5; // the buzzer
-//int solenoid = 5;
 int state,state1,state2; // level sensor state
 int soapL = A2; // soap level monitor
 int waterL = A3; // water level monitor
@@ -35,6 +32,9 @@ void setup() {
   pinMode(wlLed, OUTPUT);
   pinMode(wwlLed, OUTPUT);
   pinMode(extLed, OUTPUT);
+  pinMode(soapL, INPUT);
+  pinMode(waterL, INPUT);
+  pinMode(wasteL, INPUT);
   digitalWrite(relay, HIGH);
   digitalWrite(relay2, HIGH);
   digitalWrite(relay3, HIGH);
@@ -43,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-  soapLevel();
+//  soapLevel();
   waterLevel();
   wasteLevel();
   detect = digitalRead(sensor);
@@ -107,30 +107,30 @@ void loop() {
       delay(10);
     }
     digitalWrite(relay3, HIGH);
-    Serial.println("Error!!! Find fault!!!");
+//    Serial.println("Error!!! Find fault!!!");
   }   
 }
 void soapLevel(){
   while(state <= 0){
-    digitalWrite(slLed, HIGH);
+    digitalWrite(slLed, LOW);
     state = analogRead(soapL);
     delay(10);
   }
-  digitalWrite(slLed, LOW);
+  digitalWrite(slLed, HIGH);
 }
 void waterLevel(){
   while(state1 <= 0){
-    digitalWrite(wlLed, HIGH);
+    digitalWrite(wlLed, LOW);
     state1 = analogRead(waterL);
     delay(10);
   }
-  digitalWrite(wlLed, LOW);
+  digitalWrite(wlLed, HIGH);
 }
 void wasteLevel(){
   while(state2 >= 1023){
-    digitalWrite(wwlLed, HIGH);
+    digitalWrite(wwlLed, LOW);
     state2 = analogRead(wasteL);
     delay(10);
   }
-  digitalWrite(wwlLed, LOW);
+  digitalWrite(wwlLed, HIGH);
 }
