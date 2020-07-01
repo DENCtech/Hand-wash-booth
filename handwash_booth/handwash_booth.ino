@@ -43,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-//  soapLevel();
+  soapLevel();
   waterLevel();
   wasteLevel();
   detect = digitalRead(sensor);
@@ -111,6 +111,7 @@ void loop() {
   }   
 }
 void soapLevel(){
+  state = analogRead(soapL);
   while(state <= 0){
     digitalWrite(slLed, LOW);
     state = analogRead(soapL);
@@ -119,6 +120,7 @@ void soapLevel(){
   digitalWrite(slLed, HIGH);
 }
 void waterLevel(){
+  state1 = analogRead(waterL);
   while(state1 <= 0){
     digitalWrite(wlLed, LOW);
     state1 = analogRead(waterL);
@@ -127,6 +129,7 @@ void waterLevel(){
   digitalWrite(wlLed, HIGH);
 }
 void wasteLevel(){
+  state2 = analogRead(wasteL);
   while(state2 >= 1023){
     digitalWrite(wwlLed, LOW);
     state2 = analogRead(wasteL);
