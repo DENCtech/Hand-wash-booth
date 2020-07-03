@@ -43,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-  soapLevel();
+//  soapLevel();
   waterLevel();
   wasteLevel();
   detect = digitalRead(sensor);
@@ -110,30 +110,29 @@ void loop() {
 //    Serial.println("Error!!! Find fault!!!");
   }   
 }
-void soapLevel(){
-  state = analogRead(soapL);
-  while(state <= 0){
-    digitalWrite(slLed, LOW);
-    state = analogRead(soapL);
-    delay(10);
-  }
-  digitalWrite(slLed, HIGH);
-}
+//void soapLevel(){
+//  while(state <= 0){
+//    digitalWrite(slLed, LOW);
+//    state = analogRead(soapL);
+//    delay(10);
+//  }
+//  digitalWrite(slLed, HIGH);
+//}
 void waterLevel(){
   state1 = analogRead(waterL);
   while(state1 <= 0){
-    digitalWrite(wlLed, LOW);
+    digitalWrite(wlLed, HIGH);
     state1 = analogRead(waterL);
     delay(10);
   }
-  digitalWrite(wlLed, HIGH);
+  digitalWrite(wlLed, LOW);
 }
 void wasteLevel(){
   state2 = analogRead(wasteL);
   while(state2 >= 1023){
-    digitalWrite(wwlLed, LOW);
+    digitalWrite(wwlLed, HIGH);
     state2 = analogRead(wasteL);
     delay(10);
   }
-  digitalWrite(wwlLed, HIGH);
+  digitalWrite(wwlLed, LOW);
 }
