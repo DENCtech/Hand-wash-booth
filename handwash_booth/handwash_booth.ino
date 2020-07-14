@@ -10,7 +10,7 @@ int relay3 = 2; // water pump
 int relay4 = 5; // solenoid valve
 int button = 6; // water tank mode of operation button HIGH for external  and LOW for internal
 int know; // status of the button
-int slLed = 10; // empty soap level LED
+int powerLed = 10; // System power LED
 int wlLed = 11; // empty water level LED
 int wwlLed = 12; // full waste water level LED
 int extLed = 13; // external/internal water source LED
@@ -29,12 +29,15 @@ void setup() {
   pinMode(relay2, OUTPUT);
   pinMode(relay3, OUTPUT);
   pinMode(relay4, OUTPUT);
+  
+  pinMode(powerLed, OUTPUT);
   pinMode(wlLed, OUTPUT);
   pinMode(wwlLed, OUTPUT);
   pinMode(extLed, OUTPUT);
   pinMode(soapL, INPUT);
   pinMode(waterL, INPUT);
   pinMode(wasteL, INPUT);
+  digitalWrite(powerLED, HIGH);
   digitalWrite(relay, HIGH);
   digitalWrite(relay2, HIGH);
   digitalWrite(relay3, HIGH);
@@ -111,28 +114,33 @@ void loop() {
   }   
 }
 //void soapLevel(){
-//  while(state <= 0){
-//    digitalWrite(slLed, LOW);
+//  state = analogRead(soapL);
+//  if(state <= 0){
+//    digitalWrite(slLed, HIGH);
 //    state = analogRead(soapL);
 //    delay(10);
+//  }else{
+//    digitalWrite(slLed, LOW);
 //  }
-//  digitalWrite(slLed, HIGH);
+//  
 //}
 void waterLevel(){
   state1 = analogRead(waterL);
-  while(state1 <= 0){
+  if(state1 <= 0){
     digitalWrite(wlLed, HIGH);
     state1 = analogRead(waterL);
     delay(10);
+  }else{
+    digitalWrite(wlLed, LOW);
   }
-  digitalWrite(wlLed, LOW);
 }
 void wasteLevel(){
   state2 = analogRead(wasteL);
-  while(state2 >= 1023){
+  if(state2 >= 1023){
     digitalWrite(wwlLed, HIGH);
     state2 = analogRead(wasteL);
     delay(10);
+  }else{
+    digitalWrite(wwlLed, LOW);
   }
-  digitalWrite(wwlLed, LOW);
 }
