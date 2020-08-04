@@ -37,7 +37,7 @@ void setup() {
   pinMode(soapL, INPUT);
   pinMode(waterL, INPUT);
   pinMode(wasteL, INPUT);
-  digitalWrite(powerLED, HIGH);
+  digitalWrite(powerLed, HIGH);
   digitalWrite(relay, HIGH);
   digitalWrite(relay2, HIGH);
   digitalWrite(relay3, HIGH);
@@ -55,7 +55,7 @@ void loop() {
   know = digitalRead(button);
   if(know == LOW){
     digitalWrite(extLed, HIGH);
-    digitalWrite(relay4, HIGH);
+//    digitalWrite(relay4, HIGH);
     delay(100);
 //    if(detect3 < 1000){
 //      status1 = !status1;
@@ -90,7 +90,7 @@ void loop() {
   }
   else{
     digitalWrite(extLed, LOW);
-    digitalWrite(relay4, LOW);
+//    digitalWrite(relay4, LOW);
     delay(100);
     while(detect == 0){
       digitalWrite(relay, LOW);
@@ -105,11 +105,11 @@ void loop() {
     }
     digitalWrite(relay2, HIGH);
     while(detect3 == 0){
-      digitalWrite(relay3, LOW);
+      digitalWrite(relay4, LOW);
       detect3 = digitalRead(sensor3);
       delay(10);
     }
-    digitalWrite(relay3, HIGH);
+    digitalWrite(relay4, HIGH);
 //    Serial.println("Error!!! Find fault!!!");
   }   
 }
